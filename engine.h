@@ -21,13 +21,13 @@ class Engine
         {
         }
 
-        constexpr Engine& update()
+        constexpr auto update()
         {
-            auto b = board_.board;
+            auto b = board_;
             for (int i = 0; i < COL; ++i) {
                 for (int j = 0;  j < ROW; ++j) {
                     int aliveAround = aliveCount(j, i);
-                    if(board_.board[i][j]) //alive
+                    if(board_[i][j]) //alive
                     {
                         if(aliveAround < 2 )
                         {
@@ -54,18 +54,18 @@ class Engine
                     }
                 }
             }
-            board_.board = b;
+            board_ = b;
             return *this;
         }
 
-        constexpr const GameBoard::type& getBoard() const
+        constexpr const GameBoard& getBoard() const
         {
-            return board_.board;
+            return board_;
         }
 
     private:
         GameBoard board_;
-        constexpr bool InBoard(int x, int y)
+        constexpr bool InBoard(int x, int y) const
         {
             if (x < ROW && x >= 0 && y < COL && y >=0) {
                 return true;
@@ -73,14 +73,14 @@ class Engine
             return false;
         }
 
-        constexpr int aliveCount(int x, int y)
+        constexpr int aliveCount(int x, int y) const
         {
             int count = 0;
             for (int i = -1; i <= 1; ++i) {
                 for (int j = -1;  j <= 1; ++j) {
                     if((i != 0 || j != 0) && InBoard(x+i, y+j))
                     {
-                        if(board_.board[y+j][x+i])
+                        if(board_[y+j][x+i])
                         {
                             ++count;
                         }
