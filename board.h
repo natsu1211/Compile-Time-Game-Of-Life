@@ -22,27 +22,20 @@
 #endif /* ifndef RSEED */
 
 template<int Col, int Row>
-struct Board
-{
-    std::array<std::array<bool, Row>, Col> board;
-
-    constexpr Board()
-    {
-        auto rand = Random(static_cast<unsigned>(RSEED));
-        for (int i = 0; i < Col; ++i) {
-            for (int j = 0; j < Row; ++j) {
-                board[i][j] = rand.range(0, 2);
-            }
-        }
-    }
-    using type = decltype(board);
-};
+using Board = std::array<std::array<bool, Row>, Col>;
 
 using GameBoard = Board<COL, ROW>;
 
 static constexpr GameBoard generateInitBoard()
 {
-    return GameBoard{};
+    GameBoard board{};
+    auto rand = Random(static_cast<unsigned>(RSEED));
+    for (int i = 0; i < COL; ++i) {
+        for (int j = 0; j < ROW; ++j) {
+            board[i][j] = rand.range(0, 2);
+        }
+    }
+    return board;
 }
 
 #endif /* end of include guard: BOARD_H_0MFOR8WC */
