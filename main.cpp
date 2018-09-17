@@ -2,7 +2,7 @@
 # author  : natsu1211
 # date    : 2018-09-14
 ------------------------------- */
-#define RUNTIME 1
+#define RUNTIME 0
 
 #if RUNTIME
 #include <cstdlib>
@@ -25,13 +25,12 @@ int main(int argc, char* argv[]) {
         //std::cout << std::string(100, '\n'); //simple and safe clear
         std::cout << "Generation: " << i+1 << '\n';
         const auto& nextEngine = engine.update();
-        Printer<GameBoard::type>::print(nextEngine.getBoard());
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        Printer<GameBoard>::print(nextEngine.getBoard());
+        std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
 #else
-    Engine engine(generateInitBoard());
-    const auto& nextEngine = engine.update();
-    Printer<GameBoard::type>::print(nextEngine.getBoard());
+    constexpr auto nextEngine = Engine(generateInitBoard()).update();
+    Printer<GameBoard>::print(nextEngine.getBoard()); //runtime io
 #endif
     return 0;
 }
