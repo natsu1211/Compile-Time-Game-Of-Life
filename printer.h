@@ -11,8 +11,9 @@
 template<typename T>
 struct Printer
 {
-    static void print(T board)
+    static void print(T board, int i = 0)
     {
+        std::cout << "Generation: " << i+1 << '\n';
         std::cout << "--------------------------------------------" << '\n';
         for(auto& row : board)
         {

@@ -4,33 +4,32 @@
 ------------------------------- */
 #define RUNTIME 0
 
-#if RUNTIME
 #include <cstdlib>
 #include <chrono>
 #include <thread>
 #include <iostream>
 #include <string>
-#endif
 #include "const_string.h"
 #include "board.h"
 #include "engine.h"
 #include "printer.h"
-
+#include "util.h"
 
 int main(int argc, char* argv[]) {
+    constexpr std::size_t STEPS = 100; //simulation steps
 #if RUNTIME
     Engine engine(generateInitBoard());
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < STEPS; ++i) {
         system("clear"); // system is danger!
         //std::cout << std::string(100, '\n'); //simple and safe clear
-        std::cout << "Generation: " << i+1 << '\n';
         const auto& nextEngine = engine.update();
-        Printer<GameBoard>::print(nextEngine.getBoard());
+        Printer<GameBoard>::print(nextEngine.getBoard(), i);
         std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
 #else
-    constexpr auto nextEngine = Engine(generateInitBoard()).update();
-    Printer<GameBoard>::print(nextEngine.getBoard()); //runtime io
+    constexpr auto engine = Engine(generateInitBoard());
+    constexpr auto t = to_tuple<STEPS>::apply(engine);
+    for_each_tuple<Printer>(t);
 #endif
     return 0;
 }
