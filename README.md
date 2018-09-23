@@ -16,3 +16,5 @@ Also change `STEPS` variable in `main.cpp` to set the simulation step, the defau
 Define `RUNTIME` to `0` or `1` to make simulation run at compile-time or run-time.
 You can see output at console, refreshed at every 0.3 second.     
 
+## Demo
+![](https://github.com/natsu1211/Compile-Time-Game-Of-Life/blob/master/demo.gif)
