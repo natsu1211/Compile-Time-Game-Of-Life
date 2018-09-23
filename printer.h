@@ -5,14 +5,20 @@
 
 #ifndef PRINTER_H_QIOBDHFR
 #define PRINTER_H_QIOBDHFR
-#include "board.h"
 #include <iostream>
+#include <cstdlib>
+#include <chrono>
+#include <thread>
+#include <string>
+#include "board.h"
 
 template<typename T>
 struct Printer
 {
     static void print(T board, int i = 0)
     {
+        system("clear"); // system is danger!
+        //std::cout << std::string(100, '\n'); //simple and safe clear
         std::cout << "Generation: " << i+1 << '\n';
         std::cout << "--------------------------------------------" << '\n';
         for(auto& row : board)
@@ -25,6 +31,7 @@ struct Printer
             std::cout << " |" << '\n';
         }
         std::cout << "--------------------------------------------" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
 };
 

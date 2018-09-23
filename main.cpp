@@ -4,12 +4,6 @@
 ------------------------------- */
 #define RUNTIME 0
 
-#include <cstdlib>
-#include <chrono>
-#include <thread>
-#include <iostream>
-#include <string>
-#include "const_string.h"
 #include "board.h"
 #include "engine.h"
 #include "printer.h"
@@ -20,11 +14,8 @@ int main(int argc, char* argv[]) {
 #if RUNTIME
     Engine engine(generateInitBoard());
     for (int i = 0; i < STEPS; ++i) {
-        system("clear"); // system is danger!
-        //std::cout << std::string(100, '\n'); //simple and safe clear
         const auto& nextEngine = engine.update();
         Printer<GameBoard>::print(nextEngine.getBoard(), i);
-        std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }
 #else
     constexpr auto engine = Engine(generateInitBoard());
