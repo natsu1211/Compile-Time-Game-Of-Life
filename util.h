@@ -3,8 +3,6 @@
 # date    : 2018-09-22
 ------------------------------- */
 
-#include <vector>
-
 #ifndef UTIL_H_7WJEFSO6
 #define UTIL_H_7WJEFSO6
 

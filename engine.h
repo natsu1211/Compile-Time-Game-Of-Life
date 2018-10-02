@@ -5,7 +5,6 @@
 
 #ifndef ENGINE_H_JXB8MVTF
 #define ENGINE_H_JXB8MVTF
-#include "const_string.h"
 #include "board.h"
 
 class Engine
